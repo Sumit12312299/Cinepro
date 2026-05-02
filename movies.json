@@ -1,0 +1,344 @@
+[
+    {
+        "id": 1,
+        "title": "Daredevil: Born Again S2",
+        "year": "2025",
+        "rating": "9.4",
+        "poster": "daredevil_born_again_season_2.jpg",
+        "trailerId": "b9EkMc79ZSU",
+        "genre": "Action",
+        "type": "featured",
+        "director": "Various",
+        "description": "The Man Without Fear returns for his most intense chapter yet, as Matt Murdock confronts his deadliest enemies in the streets of Hell's Kitchen.",
+        "cast": [
+            {"name": "Charlie Cox", "role": "Matt Murdock"},
+            {"name": "Vincent D'Onofrio", "role": "Wilson Fisk"},
+            {"name": "Deborah Ann Woll", "role": "Karen Page"},
+            {"name": "Elden Henson", "role": "Foggy Nelson"}
+        ]
+    },
+    {
+        "id": 2,
+        "title": "The Dark Knight",
+        "year": "2008",
+        "rating": "9.0",
+        "poster": "https://m.media-amazon.com/images/M/MV5BMTMxNTMwODM0NF5BMl5BanBnXkFtZTcwODAyMTk2Mw@@._V1_SX300.jpg",
+        "trailerId": "EXeTwQWrcwY",
+        "genre": "Action",
+        "type": "featured",
+        "director": "Christopher Nolan",
+        "description": "When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice.",
+        "cast": [
+            {"name": "Christian Bale", "role": "Bruce Wayne / Batman"},
+            {"name": "Heath Ledger", "role": "The Joker"},
+            {"name": "Gary Oldman", "role": "James Gordon"},
+            {"name": "Morgan Freeman", "role": "Lucius Fox"}
+        ]
+    },
+    {
+        "id": 3,
+        "title": "Inception",
+        "year": "2010",
+        "rating": "8.8",
+        "poster": "https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_SX300.jpg",
+        "trailerId": "YoHD9XEInc0",
+        "genre": "Sci-Fi",
+        "type": "featured",
+        "director": "Christopher Nolan",
+        "description": "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O.",
+        "cast": [
+            {"name": "Leonardo DiCaprio", "role": "Cobb"},
+            {"name": "Joseph Gordon-Levitt", "role": "Arthur"},
+            {"name": "Elliot Page", "role": "Ariadne"},
+            {"name": "Tom Hardy", "role": "Eames"}
+        ]
+    },
+    {
+        "id": 4,
+        "title": "Oppenheimer",
+        "year": "2023",
+        "rating": "8.4",
+        "poster": "https://m.media-amazon.com/images/M/MV5BMDBmYTZjNjctZjdjZi00NGRkLTgwMzctZmI2NWU2YzNlYTk3XkEyXkFqcGdeQXVyMTUzMTg2ODkz._V1_SX300.jpg",
+        "trailerId": "uYPbbksJxIg",
+        "genre": "Drama",
+        "type": "featured",
+        "director": "Christopher Nolan",
+        "description": "The story of American scientist J. Robert Oppenheimer and his role in the development of the atomic bomb.",
+        "cast": [
+            {"name": "Cillian Murphy", "role": "J. Robert Oppenheimer"},
+            {"name": "Emily Blunt", "role": "Kitty Oppenheimer"},
+            {"name": "Matt Damon", "role": "Leslie Groves"},
+            {"name": "Robert Downey Jr.", "role": "Lewis Strauss"}
+        ]
+    },
+    {
+        "id": 5,
+        "title": "Spider-Man: Across the Spider-Verse",
+        "year": "2023",
+        "rating": "8.6",
+        "poster": "https://m.media-amazon.com/images/M/MV5BMzI0NmVkMjEtYmY4MS00ZDMxLTlkZmEtMzU4MDQxYTMzMjU2XkEyXkFqcGdeQXVyMzQ0MzA0NTM@._V1_SX300.jpg",
+        "trailerId": "shW9i6k8cB0",
+        "genre": "Animation",
+        "type": "featured",
+        "director": "Joaquim Dos Santos",
+        "description": "Miles Morales catapults across the Multiverse, where he encounters a team of Spider-People charged with protecting its very existence.",
+        "cast": [
+            {"name": "Shameik Moore", "role": "Miles Morales"},
+            {"name": "Hailee Steinfeld", "role": "Gwen Stacy"},
+            {"name": "Brian Tyree Henry", "role": "Jefferson Davis"},
+            {"name": "Oscar Isaac", "role": "Miguel O'Hara"}
+        ]
+    },
+    {
+        "id": 6,
+        "title": "John Wick: Chapter 4",
+        "year": "2023",
+        "rating": "7.7",
+        "poster": "https://m.media-amazon.com/images/M/MV5BMDExZGMyODgtMDgyYi00NGIwLWJhMTEtOTdkZGFjNmZiMTE2XkEyXkFqcGdeQXVyMTUzMTg2ODkz._V1_SX300.jpg",
+        "trailerId": "qEVUrkdcxs4",
+        "genre": "Action",
+        "type": "popular",
+        "director": "Chad Stahelski",
+        "description": "John Wick uncovers a path to defeating The High Table. But before he can earn his freedom, Wick must face off against a new enemy with powerful alliances across the globe and forces that turn old friends into foes.",
+        "cast": [
+            {"name": "Keanu Reeves", "role": "John Wick"},
+            {"name": "Donnie Yen", "role": "Caine"},
+            {"name": "Bill Skarsgard", "role": "Marquis"},
+            {"name": "Laurence Fishburne", "role": "Bowery King"}
+        ]
+    },
+    {
+        "id": 7,
+        "title": "Interstellar",
+        "year": "2014",
+        "rating": "8.7",
+        "poster": "https://m.media-amazon.com/images/M/MV5BZjdkOTU3MDktN2IxOS00OGEyLWFmMjktY2FiMmZkNWIyODZiXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_SX300.jpg",
+        "trailerId": "zSWdZVtXT7E",
+        "genre": "Sci-Fi",
+        "type": "popular",
+        "director": "Christopher Nolan",
+        "description": "When Earth becomes uninhabitable in the future, a farmer and ex-NASA pilot, Joseph Cooper, is tasked to pilot a spacecraft, along with a team of researchers, to find a new planet for humans.",
+        "cast": [
+            {"name": "Matthew McConaughey", "role": "Cooper"},
+            {"name": "Anne Hathaway", "role": "Brand"},
+            {"name": "Jessica Chastain", "role": "Murphy"},
+            {"name": "Michael Caine", "role": "Professor Brand"}
+        ]
+    },
+    {
+        "id": 8,
+        "title": "Top Gun: Maverick",
+        "year": "2022",
+        "rating": "8.3",
+        "poster": "https://m.media-amazon.com/images/M/MV5BZWYzOGEwNTgtNWU3NS00ZGQ0LThhMWUtM2E1OTJiNGYzMjY1XkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_SX300.jpg",
+        "trailerId": "giXcoGaXegM",
+        "genre": "Action",
+        "type": "popular",
+        "director": "Joseph Kosinski",
+        "description": "After more than thirty years of service as one of the Navy's top aviators, Pete Mitchell is where he belongs, pushing the envelope as a courageous test pilot and dodging the advancement in rank that would ground him.",
+        "cast": [
+            {"name": "Tom Cruise", "role": "Maverick"},
+            {"name": "Miles Teller", "role": "Rooster"},
+            {"name": "Jennifer Connelly", "role": "Penny Benjamin"},
+            {"name": "Jon Hamm", "role": "Cyclone"}
+        ]
+    },
+    {
+        "id": 101,
+        "title": "Stranger Things",
+        "year": "2016-2025",
+        "rating": "8.7",
+        "poster": "https://m.media-amazon.com/images/M/MV5BMDZkYmVhNjMtNWU4MC00MDQxLWE3MjYtZGJlZGU0N2FhZTkxXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_SX300.jpg",
+        "trailerId": "b9EkMc79ZSU",
+        "genre": "Sci-Fi",
+        "type": "webseries",
+        "director": "Duffer Brothers",
+        "description": "When a young boy disappears, his mother, a police chief and his friends must confront terrifying supernatural forces in order to get him back.",
+        "cast": [
+            {"name": "Winona Ryder", "role": "Joyce Byers"},
+            {"name": "David Harbour", "role": "Jim Hopper"},
+            {"name": "Finn Wolfhard", "role": "Mike Wheeler"},
+            {"name": "Millie Bobby Brown", "role": "Eleven"}
+        ]
+    },
+    {
+        "id": 102,
+        "title": "The Last of Us",
+        "year": "2023-",
+        "rating": "8.8",
+        "poster": "https://m.media-amazon.com/images/M/MV5BZGUzYTI3M2EtZmM0Yy00NGUyLWI4ODEtN2EwNzUxN2U4N2U1XkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_SX300.jpg",
+        "trailerId": "uLtkt8BonwY",
+        "genre": "Drama",
+        "type": "webseries",
+        "director": "Craig Mazin, Neil Druckmann",
+        "description": "After a global pandemic destroys civilization, a hardened survivor takes charge of a 14-year-old girl who may be humanity's last hope.",
+        "cast": [
+            {"name": "Pedro Pascal", "role": "Joel Miller"},
+            {"name": "Bella Ramsey", "role": "Ellie Williams"},
+            {"name": "Anna Torv", "role": "Tess"},
+            {"name": "Gabriel Luna", "role": "Tommy"}
+        ]
+    },
+    {
+        "id": 103,
+        "title": "Breaking Bad",
+        "year": "2008-2013",
+        "rating": "9.5",
+        "poster": "https://m.media-amazon.com/images/M/MV5BYmQ4YWMxYjUtNjkwYi00Y2Q5LWIwY2ItYWVmZGNkZDA2OThlXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_SX300.jpg",
+        "trailerId": "HhesaQXLuRY",
+        "genre": "Crime",
+        "type": "webseries",
+        "director": "Vince Gilligan",
+        "description": "A high school chemistry teacher diagnosed with inoperable lung cancer turns to manufacturing and selling methamphetamine in order to secure his family's future.",
+        "cast": [
+            {"name": "Bryan Cranston", "role": "Walter White"},
+            {"name": "Aaron Paul", "role": "Jesse Pinkman"},
+            {"name": "Anna Gunn", "role": "Skyler White"},
+            {"name": "Dean Norris", "role": "Hank Schrader"}
+        ]
+    },
+    {
+        "id": 201,
+        "title": "Suzume",
+        "year": "2022",
+        "rating": "7.7",
+        "poster": "https://m.media-amazon.com/images/M/MV5BNGVkNDc3NjUtZDUxZS00MzE0LWEwZjAtZmExYmI1ZTlkNWU2XkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_SX300.jpg",
+        "trailerId": "fvW9fsh_hD8",
+        "genre": "Animation",
+        "type": "anime",
+        "director": "Makoto Shinkai",
+        "description": "A 17-year-old girl's modern-day story on Kyushu, where she meets a young man who is looking for a door.",
+        "cast": [
+            {"name": "Nanoka Hara", "role": "Suzume Iwato"},
+            {"name": "Hokuto Matsumura", "role": "Sota Munakata"},
+            {"name": "Eri Fukatsu", "role": "Tamaki Iwato"},
+            {"name": "Shota Sometani", "role": "Minoru Okabe"}
+        ]
+    },
+    {
+        "id": 202,
+        "title": "Your Name",
+        "year": "2016",
+        "rating": "8.4",
+        "poster": "https://m.media-amazon.com/images/M/MV5BODViZmVhMGItZTI4My00ODljLTkzYzgtYjY2N2I1MWYxZWU3XkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_SX300.jpg",
+        "trailerId": "hRfHcp2G69c",
+        "genre": "Romance",
+        "type": "anime",
+        "director": "Makoto Shinkai",
+        "description": "Two strangers find themselves linked in a bizarre way. When a connection forms, will distance be the only thing to keep them apart?",
+        "cast": [
+            {"name": "Ryunosuke Kamiki", "role": "Taki Tachibana"},
+            {"name": "Mone Kamishiraishi", "role": "Mitsuha Miyamizu"},
+            {"name": "Ryo Narita", "role": "Katsuhiko Teshigawara"},
+            {"name": "Aoi Yuki", "role": "Sayaka Natori"}
+        ]
+    },
+    {
+        "id": 203,
+        "title": "Spirited Away",
+        "year": "2001",
+        "rating": "8.6",
+        "poster": "https://m.media-amazon.com/images/M/MV5BMjlmZmI5MDctTI2Zi00MzgzLTQ0MDItZDBiZGRhNDcwYjRjXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_SX300.jpg",
+        "trailerId": "ByXuk9QqQkk",
+        "genre": "Fantasy",
+        "type": "anime",
+        "director": "Hayao Miyazaki",
+        "description": "During her family's move to the suburbs, a sullen 10-year-old girl wanders into a world ruled by gods, witches, and spirits, and where humans are changed into beasts.",
+        "cast": [
+            {"name": "Rumi Hiiragi", "role": "Chihiro Ogino"},
+            {"name": "Miyu Irino", "role": "Haku"},
+            {"name": "Mari Natsuki", "role": "Yubaba / Zeniba"},
+            {"name": "Takashi Naito", "role": "Akio Ogino"}
+        ]
+    },
+    {
+        "id": 204,
+        "title": "Jujutsu Kaisen: Culling Game",
+        "year": "2025",
+        "rating": "8.9",
+        "poster": "jjk-the-culling-game-part-1-ep-1-2-1024x496.jpg",
+        "trailerId": "X_p7f6A0V-s",
+        "genre": "Animation",
+        "type": "anime",
+        "director": "Various",
+        "description": "A boy swallows a cursed talisman and finds himself caught in a war between Jujutsu Sorcerers and powerful Curses.",
+        "cast": [
+            {"name": "Junya Enoki", "role": "Yuji Itadori"},
+            {"name": "Yuma Uchida", "role": "Megumi Fushiguro"},
+            {"name": "Asami Seto", "role": "Nobara Kugisaki"},
+            {"name": "Yuichi Nakamura", "role": "Satoru Gojo"}
+        ]
+    },
+    {
+        "id": 301,
+        "title": "3 Idiots",
+        "year": "2009",
+        "rating": "8.4",
+        "poster": "https://m.media-amazon.com/images/M/MV5BMjIxOTU2NDQ5OV5BMl5BanBnXkFtZTcwODgzMTk3Mg@@._V1_SX300.jpg",
+        "trailerId": "K0eKn6y9v6Y",
+        "genre": "Comedy",
+        "type": "bollywood",
+        "director": "Rajkumar Hirani",
+        "description": "Two friends are searching for their long lost companion. They revisit their college days and recall the memories of their friend who inspired them to think differently, even as the rest of the world called them \"idiots\".",
+        "cast": [
+            {"name": "Aamir Khan", "role": "Rancho"},
+            {"name": "Madhavan", "role": "Farhan"},
+            {"name": "Sharman Joshi", "role": "Raju"},
+            {"name": "Kareena Kapoor", "role": "Pia"}
+        ]
+    },
+    {
+        "id": 302,
+        "title": "Dangal",
+        "year": "2016",
+        "rating": "8.3",
+        "poster": "https://m.media-amazon.com/images/M/MV5BMTQ4MzQzMzM2Nl5BMl5BanBnXkFtZTgwMTQ1NzU3MDI@._V1_SX300.jpg",
+        "trailerId": "x_7YlGvGvS8",
+        "genre": "Sports",
+        "type": "bollywood",
+        "director": "Nitesh Tiwari",
+        "description": "Former wrestler Mahavir Singh Phogat and his two wrestler daughters struggle towards glory at the Commonwealth Games in the face of societal oppression.",
+        "cast": [
+            {"name": "Aamir Khan", "role": "Mahavir Singh Phogat"},
+            {"name": "Fatima Sana Shaikh", "role": "Geeta Phogat"},
+            {"name": "Sanya Malhotra", "role": "Babita Kumari"},
+            {"name": "Aparshakti Khurana", "role": "Omkar"}
+        ]
+    },
+    {
+        "id": 303,
+        "title": "RRR",
+        "year": "2022",
+        "rating": "7.9",
+        "poster": "https://m.media-amazon.com/images/M/MV5BODUwNDNjYzctZDчногоМjY3LWI2Y2QtYmZlZTRiNGRiMDU2XkEyXkFqcGdeQXVyODE5NzE3OTE@._V1_SX300.jpg",
+        "trailerId": "NgBoMJy386M",
+        "genre": "Action",
+        "type": "bollywood",
+        "director": "S.S. Rajamouli",
+        "description": "A fictitious story about two legendary revolutionaries and their journey away from home before they started fighting for their country in 1920s.",
+        "cast": [
+            {"name": "N.T. Rama Rao Jr.", "role": "Komaram Bheem"},
+            {"name": "Ram Charan", "role": "Alluri Sitarama Raju"},
+            {"name": "Ajay Devgn", "role": "Venkata Rama Raju"},
+            {"name": "Alia Bhatt", "role": "Sita"}
+        ]
+    },
+    {
+        "id": 304,
+        "title": "Ramayana: Part 1",
+        "year": "2026",
+        "rating": "9.5",
+        "poster": "world-of-ramayan-movie-(worldoframayanamovie.com).webp",
+        "trailerId": "6-V_Pj_zCqI",
+        "genre": "Epic",
+        "type": "bollywood",
+        "director": "Nitesh Tiwari",
+        "description": "An epic reimagining of the ancient Indian legend, starring Ranbir Kapoor as Lord Ram.",
+        "cast": [
+            {"name": "Ranbir Kapoor", "role": "Lord Ram"},
+            {"name": "Sai Pallavi", "role": "Sita"},
+            {"name": "Yash", "role": "Ravana"},
+            {"name": "Sunny Deol", "role": "Hanuman"}
+        ]
+    }
+]

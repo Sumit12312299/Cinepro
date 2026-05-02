@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Details | CinePro</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Outfit:wght@800&display=swap" rel="stylesheet">
+</head>
+<body class="movie-detail-page">
+    <nav class="navbar scrolled">
+        <div class="nav-container">
+            <div class="nav-logo" onclick="window.location.href='index.html'">CINEPRO</div>
+            <div class="nav-menu">
+                <a href="index.html">Home</a>
+                <div class="genre-wrapper">
+                    <button class="btn-genre" id="genre-toggle">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+                        Menu
+                    </button>
+                    <div class="genre-dropdown" id="genre-menu">
+                        <div class="genre-list" id="genre-list"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="nav-search">
+                <input type="text" placeholder="Search movies...">
+                <button>Search</button>
+            </div>
+            <div class="nav-user">
+                <button class="btn-watchlist-nav" id="nav-watchlist">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+                    Watchlist <span class="count-badge" id="watchlist-count">0</span>
+                </button>
+                <div id="theme-toggle" class="theme-toggle" style="cursor:pointer; margin-right: 15px;"></div>
+                <button class="btn-signin">Sign In</button>
+            </div>
+        </div>
+    </nav>
+
+    <main id="movie-content">
+        <div class="detail-container">
+            <div id="detail-header" class="detail-header"></div>
+            <div class="detail-content-wrapper">
+                <div class="detail-main-info">
+                    <div id="detail-poster" class="detail-poster" style="background-size: cover; background-position: center;"></div>
+                    <div class="detail-text">
+                        <div id="detail-meta" class="detail-meta"></div>
+                        <h2 id="detail-title"></h2>
+                        <p id="detail-description" class="detail-description"></p>
+                        <div class="detail-actions">
+                            <button id="detail-play-btn" class="btn-play">Watch Trailer</button>
+                            <button id="detail-watchlist-btn" class="btn-watchlist">+ Watchlist</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cast-section">
+                    <h3>Top Cast</h3>
+                    <div id="cast-gallery" class="cast-gallery"></div>
+                </div>
+
+                <div class="similar-section">
+                    <h3>More Like This</h3>
+                    <div id="similar-grid" class="similar-grid"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-content">
+            <p>© 2026 CinePro - Premium Movie Reviews. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="#">Privacy</a>
+                <a href="#">Terms</a>
+                <a href="#">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Video Modal (Shared structure) -->
+    <div id="video-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="video-container" id="player-container"></div>
+        </div>
+    </div>
+
+    <!-- Watchlist Modal -->
+    <div id="watchlist-modal" class="modal">
+        <div class="modal-content watchlist-content">
+            <span class="close-watchlist-modal">&times;</span>
+            <h2 style="color: var(--primary); margin-bottom: 2rem;">My Watchlist</h2>
+            <div id="watchlist-items" class="watchlist-items"></div>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div id="login-modal" class="modal auth-modal">
+        <div class="modal-content auth-content">
+            <span class="close-auth-modal">&times;</span>
+            <h2>Sign In to CinePro</h2>
+            <form id="login-form">
+                <input type="email" placeholder="Email Address" required>
+                <input type="password" placeholder="Password" required>
+                <button type="submit" class="btn-signin" style="width: 100%; margin-top: 1rem;">Sign In</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="toast-container" class="toast-container"></div>
+
+    <script type="module" src="./movie.js"></script>
+</body>
+</html>

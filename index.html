@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CinePro | Premium Movie Reviews</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Outfit:wght@500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <!-- Smooth Opening Overlay -->
+    <div class="loader-overlay">
+        <h1 class="loader-logo">CINEPRO</h1>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="navbar" class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">CINEPRO</div>
+            <div class="nav-menu">
+                <div class="genre-wrapper">
+                    <button id="genre-toggle" class="btn-genre">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="3" y1="12" x2="21" y2="12"></line>
+                            <line x1="3" y1="6" x2="21" y2="6"></line>
+                            <line x1="3" y1="18" x2="21" y2="18"></line>
+                        </svg>
+                        <span>Menu</span>
+                    </button>
+                    <div id="genre-menu" class="genre-dropdown">
+                        <div id="genre-list" class="genre-list">
+                            <!-- Genres will be populated here -->
+                        </div>
+                    </div>
+                </div>
+                <a href="#home">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"></path>
+                        <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                    </svg>
+                    <span>Home</span>
+                </a>
+                <a href="#trending">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+                        <polyline points="17 6 23 6 23 12"></polyline>
+                    </svg>
+                    <span>Trending</span>
+                </a>
+                <a href="#popular">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                    </svg>
+                    <span>Popular</span>
+                </a>
+            </div>
+            <div class="nav-search">
+                <input type="text" placeholder="Search movies...">
+                <button>Search</button>
+            </div>
+            <div class="nav-user">
+                <button id="theme-toggle" class="btn-theme-toggle" title="Toggle Dark/Light Mode">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+                </button>
+                <button id="nav-watchlist" class="btn-watchlist-nav">Watchlist <span id="watchlist-count" class="count-badge">0</span></button>
+                <button class="btn-signin">Sign In</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section (IMDb Style) -->
+    <header class="hero" id="home">
+        <div class="hero-container">
+            <div class="hero-main">
+                <div class="hero-carousel" id="hero-carousel">
+                    <!-- Dynamic Hero Slide 1: Daredevil -->
+                    <div class="hero-slide active" data-index="0" style="background-image: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.7) 100%), url('daredevil_born_again_season_2.jpg');">
+                        <div class="hero-content">
+                            <span class="badge">Most Anticipated Series 2025</span>
+                            <h2>Daredevil: Born Again S2</h2>
+                            <p>The Man Without Fear returns for his most intense chapter yet, as Matt Murdock confronts his deadliest enemies in the streets of Hell's Kitchen.</p>
+                            <div class="hero-actions">
+                                <button class="btn-play" data-video="b9EkMc79ZSU">Watch Trailer</button>
+                                <button class="btn-watchlist">+ Watchlist</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Slide 2: Project Hail Mary (March 2026) -->
+                    <div class="hero-slide" data-index="1" style="background-image: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.7) 100%), url('https://m.media-amazon.com/images/M/MV5BNDExZGMyODgtMDgyYi00NGIwLWJhMTEtOTdkZGFjNmZiMTE2XkEyXkFqcGdeQXVyMTUzMTg2ODkz._V1_SX1200.jpg');">
+                        <div class="hero-content">
+                            <span class="badge" style="background: #2196F3;">Coming March 2026</span>
+                            <h2>Project Hail Mary</h2>
+                            <p>An astronaut is the sole survivor on a desperate, last-chance mission to save Earth from a global extinction event.</p>
+                            <div class="hero-actions">
+                                <button class="btn-play" data-video="YoHD9XEInc0">Watch Teaser</button>
+                                <button class="btn-watchlist">+ Watchlist</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Slide 3: Ramayana (Epic Announcement) -->
+                    <div class="hero-slide" data-index="2" style="background-image: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.7) 100%), url('world-of-ramayan-movie-(worldoframayanamovie.com).webp');">
+                        <div class="hero-content">
+                            <span class="badge" style="background: #FF9800;">Teaser Announced • April</span>
+                            <h2>Ramayana: Part 1</h2>
+                            <p>An epic reimagining of the ancient Indian legend, starring Ranbir Kapoor as Lord Ram, directed by Nitesh Tiwari.</p>
+                            <div class="hero-actions">
+                                <button class="btn-play" data-video="6-V_Pj_zCqI">Watch Teaser</button>
+                                <button class="btn-watchlist">+ Watchlist</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Slide 4: Demon Slayer (Anime) -->
+                    <div class="hero-slide" data-index="3" style="background-image: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.7) 100%), url('https://th.bing.com/th/id/OIP.Bg52kSEDA0yX4RlBdPc3kQHaEc?w=261&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3');">
+                        <div class="hero-content">
+                            <span class="badge" style="background: #ff4d4d;">Top Rated Anime</span>
+                            <h2>Demon Slayer: Infinity Castle</h2>
+                            <p>Tanjiro and the Hashira enter the Infinity Castle for the ultimate showdown against Muzan Kibutsuji.</p>
+                            <div class="hero-actions">
+                                <button class="btn-play" data-video="ByXuk9QqQkk">Watch Trailer</button>
+                                <button class="btn-watchlist">+ Watchlist</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Slide 5: Jujutsu Kaisen (Anime) -->
+                    <div class="hero-slide" data-index="4" style="background-image: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.7) 100%), url('jjk-the-culling-game-part-1-ep-1-2-1024x496.jpg');">
+                        <div class="hero-content">
+                            <span class="badge" style="background: #9c27b0;">Must Watch Anime</span>
+                            <h2>Jujutsu Kaisen: Culling Game</h2>
+                            <p>A boy swallows a cursed talisman and finds himself caught in a war between Jujutsu Sorcerers and powerful Curses.</p>
+                            <div class="hero-actions">
+                                <button class="btn-play" data-video="X_p7f6A0V-s">Watch Trailer</button>
+                                <button class="btn-watchlist">+ Watchlist</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-dots" id="hero-dots"></div>
+                <div class="hero-dots" id="hero-dots"></div>
+            </div>
+
+            <!-- Up Next Sidebar -->
+            <aside class="hero-sidebar">
+                <h3>Up Next</h3>
+                <div class="up-next-list" id="up-next-list">
+                    <div class="up-next-item active" data-index="0">
+                        <div class="up-next-thumb" style="background-image: url('daredevil_born_again_season_2.jpg')"></div>
+                        <div class="up-next-info">
+                            <span class="duration">2:15</span>
+                            <h4>Daredevil S2</h4>
+                            <p>Most Anticipated</p>
+                        </div>
+                    </div>
+                    <div class="up-next-item" data-index="1">
+                        <div class="up-next-thumb" style="background-image: url('https://m.media-amazon.com/images/M/MV5BNDExZGMyODgtMDgyYi00NGIwLWJhMTEtOTdkZGFjNmZiMTE2XkEyXkFqcGdeQXVyMTUzMTg2ODkz._V1_SX500.jpg')"></div>
+                        <div class="up-next-info">
+                            <span class="duration">2:15</span>
+                            <h4>Project Hail Mary</h4>
+                            <p>Coming March 2026</p>
+                        </div>
+                    </div>
+                    <div class="up-next-item" data-index="2">
+                        <div class="up-next-thumb" style="background-image: url('world-of-ramayan-movie-(worldoframayanamovie.com).webp')"></div>
+                        <div class="up-next-info">
+                            <span class="duration">1:30</span>
+                            <h4>Ramayana: Part 1</h4>
+                            <p>Official Teaser</p>
+                        </div>
+                    </div>
+                    <div class="up-next-item" data-index="3">
+                        <div class="up-next-thumb" style="background-image: url('https://th.bing.com/th/id/OIP.Bg52kSEDA0yX4RlBdPc3kQHaEc?w=261&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3')"></div>
+                        <div class="up-next-info">
+                            <span class="duration">2:30</span>
+                            <h4>Demon Slayer</h4>
+                            <p>Infinity Castle</p>
+                        </div>
+                    </div>
+                    <div class="up-next-item" data-index="4">
+                        <div class="up-next-thumb" style="background-image: url('jjk-the-culling-game-part-1-ep-1-2-1024x496.jpg')"></div>
+                        <div class="up-next-info">
+                            <span class="duration">2:05</span>
+                            <h4>Jujutsu Kaisen</h4>
+                            <p>Culling Game Arc</p>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+        </div>
+    </header>
+
+    <!-- Featured Section -->
+    <main class="container">
+        <section id="trending" class="movie-section">
+            <div class="section-header">
+                <h2>Featured Today</h2>
+                <div class="section-tabs">
+                    <button class="tab-btn active">Trending</button>
+                    <button class="tab-btn">Charts</button>
+                    <button class="tab-btn">Fan Favorites</button>
+                </div>
+            </div>
+            <div class="movie-grid" id="featured-grid">
+                <!-- Movie Cards will be populated here -->
+            </div>
+        </section>
+
+        <section id="popular" class="movie-section">
+            <div class="section-header">
+                <h2>What's Popular</h2>
+            </div>
+            <div class="movie-grid" id="popular-grid">
+                <!-- Popular Movie Cards -->
+            </div>
+        </section>
+
+        <section id="webseries" class="movie-section">
+            <div class="section-header">
+                <h2>Web Series</h2>
+            </div>
+            <div class="movie-grid" id="webseries-grid">
+                <!-- Web Series Cards -->
+            </div>
+        </section>
+
+        <section id="anime" class="movie-section">
+            <div class="section-header">
+                <h2>Anime</h2>
+            </div>
+            <div class="movie-grid" id="anime-grid">
+                <!-- Anime Cards -->
+            </div>
+        </section>
+
+        <section id="bollywood" class="movie-section">
+            <div class="section-header">
+                <h2>Bollywood</h2>
+            </div>
+            <div class="movie-grid" id="bollywood-grid">
+                <!-- Bollywood Cards -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Mobile Bottom Navigation -->
+    <nav class="mobile-bottom-nav">
+        <div class="mobile-nav-item active" id="mobile-nav-home">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                <polyline points="9 22 9 12 15 12 15 22"></polyline>
+            </svg>
+            <span>Home</span>
+        </div>
+        <div class="mobile-nav-item" id="mobile-nav-search">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <span>Search</span>
+        </div>
+        <div class="mobile-nav-item" id="mobile-nav-watchlist">
+            <div class="badge-container">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
+                </svg>
+                <span class="count-badge">0</span>
+            </div>
+            <span>Watchlist</span>
+        </div>
+        <div class="mobile-nav-item" id="mobile-nav-admin">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="3"></circle>
+                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2-2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+            </svg>
+            <span>Admin</span>
+        </div>
+    </nav>
+
+
+    <!-- Trailer Modal -->
+    <!-- Admin Dashboard Modal -->
+    <div id="admin-modal" class="modal">
+        <div class="admin-container">
+            <span class="close-admin">×</span>
+            <h2>🛠️ CinePro Admin Dashboard</h2>
+            <p style="color: var(--text-muted); margin-bottom: 2rem;">Add the latest movies to your JSON database with ease.</p>
+            
+            <form id="admin-form">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Movie Title</label>
+                        <input type="text" id="admin-title" placeholder="e.g. Inception 2" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Year</label>
+                        <input type="text" id="admin-year" placeholder="e.g. 2025" required>
+                    </div>
+                    <div class="form-group">
+                        <label>IMDb Rating</label>
+                        <input type="text" id="admin-rating" placeholder="e.g. 8.9" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Category (Type)</label>
+                        <select id="admin-type" required>
+                            <option value="featured">Trending / Featured</option>
+                            <option value="popular">Popular</option>
+                            <option value="webseries">Web Series</option>
+                            <option value="anime">Anime</option>
+                            <option value="bollywood">Bollywood</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Genre</label>
+                        <input type="text" id="admin-genre" placeholder="e.g. Sci-Fi, Action" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Director</label>
+                        <input type="text" id="admin-director" placeholder="Director Name" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Poster URL</label>
+                        <input type="text" id="admin-poster" placeholder="Image link or filename" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Trailer YouTube ID</label>
+                        <input type="text" id="admin-trailer" placeholder="e.g. d9MyW72ELq0" required>
+                    </div>
+                </div>
+
+                <div class="form-group" style="margin-top: 1.5rem;">
+                    <label>Short Description</label>
+                    <textarea id="admin-description" rows="3" placeholder="Movie synopsis..." required></textarea>
+                </div>
+
+                <div class="form-group" style="margin-top: 1.5rem;">
+                    <label>Cast (Format: Name:Role, Name:Role)</label>
+                    <input type="text" id="admin-cast" placeholder="e.g. Robert Downey:Iron Man, Chris Evans:Captain America" required>
+                </div>
+
+                <div class="admin-actions">
+                    <button type="submit" class="btn-signin">⚡ Add Movie</button>
+                    <button type="button" id="btn-export-json" class="btn-watchlist-nav">📥 Copy Database JSON</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-content">
+            <p>© 2026 CinePro - Premium Movie Reviews. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="#">Privacy</a>
+                <a href="#">Terms</a>
+                <a href="#">Contact</a>
+            </div>
+            <div class="admin-secret-trigger" id="admin-trigger">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="opacity: 0.2;">
+                    <circle cx="12" cy="12" r="3"></circle>
+                    <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2-2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                </svg>
+            </div>
+        </div>
+    </footer>
+    <!-- Link this modal correctly now -->
+    <div id="video-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="video-container" id="player-container">
+                <!-- YouTube player will be here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- My Watchlist Modal -->
+    <div id="watchlist-modal" class="modal">
+        <div class="modal-content watchlist-content">
+            <span class="close-watchlist-modal">&times;</span>
+            <h2 style="color: var(--primary); margin-bottom: 2rem;">My Watchlist</h2>
+            <div id="watchlist-items" class="watchlist-items">
+                <!-- Watchlist items will be rendered here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Auth Modal (Sign In / Sign Up) -->
+    <div id="login-modal" class="modal auth-modal">
+        <div class="modal-content auth-content">
+            <span class="close-auth-modal">&times;</span>
+            <h2 id="auth-title">Sign In to CinePro</h2>
+            <form id="login-form">
+                <input type="email" id="auth-email" placeholder="Email Address" required>
+                <input type="password" id="auth-password" placeholder="Password" required>
+                <button type="submit" id="auth-submit-btn" class="btn-signin" style="width: 100%; margin-top: 1rem;">Sign In</button>
+            </form>
+            <p class="auth-switch" id="auth-switch-text">Don't have an account? <a href="#" id="auth-toggle">Create one</a></p>
+        </div>
+    </div>
+
+    <!-- Toast Notifications Container -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <script type="module" src="./main.js"></script>
+</body>
+
+</html>
