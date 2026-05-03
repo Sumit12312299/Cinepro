@@ -1565,23 +1565,80 @@ h1, h2, h3, .nav-logo {
     gap: 15px;
 }
 
-/* Mobile Bottom Navigation */
+/* Mobile Bottom Navigation Enhancement */
 .mobile-bottom-nav {
-    display: none; /* Desktop hidden */
+    display: none;
     position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;
-    background: rgba(20, 20, 20, 0.7); /* Transparent background */
-    backdrop-filter: blur(20px) saturate(180%); /* Premium Glass Blur */
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    background: rgba(18, 18, 18, 0.85);
+    backdrop-filter: blur(25px) saturate(200%);
+    -webkit-backdrop-filter: blur(25px) saturate(200%);
     border-top: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 12px 0;
+    padding: 10px 0 calc(env(safe-area-inset-bottom) + 10px);
     justify-content: space-around;
     align-items: center;
     z-index: 2000;
-    padding-bottom: calc(env(safe-area-inset-bottom) + 5px);
-    box-shadow: 0 -10px 40px rgba(0,0,0,0.5);
+    box-shadow: 0 -10px 40px rgba(0,0,0,0.6);
+}
+
+.mobile-nav-item {
+    position: relative;
+    padding: 8px 12px;
+    border-radius: 12px;
+}
+
+.mobile-nav-item.active {
+    background: rgba(245, 197, 24, 0.1);
+}
+
+.mobile-nav-item.active::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 4px;
+    background: var(--primary);
+    border-radius: 50%;
+    box-shadow: 0 0 10px var(--primary);
+}
+
+@media (max-width: 768px) {
+    .filter-bar {
+        mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+        -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+        padding: 10px 20px;
+        margin-left: -20px;
+        margin-right: -20px;
+    }
+
+    .movie-card {
+        border-radius: 10px;
+    }
+
+    .card-content h4 {
+        font-size: 0.9rem;
+    }
+
+    .section-header {
+        padding: 0 4%;
+    }
+
+    .hero-content h2 {
+        font-size: 2.2rem;
+        line-height: 1.1;
+    }
+
+    .detail-text h2 {
+        font-size: 2rem;
+    }
+
+    .detail-content-wrapper {
+        border-radius: 20px 20px 0 0;
+    }
 }
 
 .mobile-nav-item {
