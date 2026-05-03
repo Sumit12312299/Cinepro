@@ -34,7 +34,7 @@ async function loadDatabase() {
 
 
 // --- Auth & Watchlist State ---
-let isLoggedIn = false; // Will be set by Supabase
+let isLoggedIn = false; // Will be set by Firebase Auth
 let watchlist = JSON.parse(localStorage.getItem('cinepro_watchlist') || '[]');
 
 const genres = [
@@ -60,6 +60,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     initSearch(); // Initialize Search
     initThemeToggle(); // Initialize Theme Toggle
     initScrollAnimations(); // Initialize ScrollTrigger
+    updateWatchlistBadge(); // Ensure badge is updated immediately
     // Auth state listener handles the UI
 });
 
@@ -647,10 +648,10 @@ function saveWatchlist() {
 }
 
 function updateWatchlistBadge() {
-    const badge = document.getElementById('watchlist-count');
-    if (badge) {
+    const badges = document.querySelectorAll('.count-badge');
+    badges.forEach(badge => {
         badge.textContent = watchlist.length;
-    }
+    });
 }
 
 function renderWatchlistItems() {

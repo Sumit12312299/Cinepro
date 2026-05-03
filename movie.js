@@ -201,8 +201,10 @@ function updateWatchlistBtn(btn, isActive) {
 }
 
 function updateWatchlistBadge() {
-    const badge = document.getElementById('watchlist-count');
-    if (badge) badge.innerText = watchlist.length;
+    const badges = document.querySelectorAll('.count-badge');
+    badges.forEach(badge => {
+        badge.innerText = watchlist.length;
+    });
 }
 
 function initModal() {
