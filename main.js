@@ -1,14 +1,25 @@
+import { initializeApp } from 'firebase/app';
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged } from 'firebase/auth';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-// --- Local Auth System (Replaces Supabase) ---
-const mockUsers = JSON.parse(localStorage.getItem('cinepro_users') || '[]');
-let currentUser = JSON.parse(localStorage.getItem('cinepro_current_user') || 'null');
+const firebaseConfig = {
+  apiKey: "AIzaSyBvZktK1hJew86anYsGS25uYF6O1gpFd34",
+  authDomain: "cinepro-8b537.firebaseapp.com",
+  projectId: "cinepro-8b537",
+  storageBucket: "cinepro-8b537.firebasestorage.app",
+  messagingSenderId: "279721685100",
+  appId: "1:279721685100:web:adea4327a9ad49b4c0e849",
+  measurementId: "G-3M3G2WTXVL"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
 
 let allMovies = [];
-let user = null; // Store real user object
+let user = null; 
 
 async function loadDatabase() {
     try {
@@ -24,7 +35,7 @@ async function loadDatabase() {
 
 // --- Auth & Watchlist State ---
 let isLoggedIn = false; // Will be set by Supabase
-let watchlist = JSON.parse(localStorage.getItem('watchlist_items') || '[]');
+let watchlist = JSON.parse(localStorage.getItem('cinepro_watchlist') || '[]');
 
 const genres = [
     "Action", "Adventure", "Animation", "Comedy", "Crime", 
@@ -533,63 +544,45 @@ function initAuth() {
         }
     });
 
-    // --- State Listener ---
-    if (currentUser) {
-        user = currentUser;
-        isLoggedIn = true;
+    // --- Firebase Auth Listener ---
+    onAuthStateChanged(auth, (firebaseUser) => {
+        user = firebaseUser;
+        isLoggedIn = !!user;
         updateAuthUI();
         updateWatchlistBadge();
-    }
+        
+        if (user) {
+            showToast(`Welcome back, ${user.email.split('@')[0]}!`);
+            document.getElementById('login-modal').style.display = 'none';
+        }
+    });
 }
 
 async function handleSignUp(email, password) {
-    const exists = mockUsers.find(u => u.email === email);
-    if (exists) {
-        showToast("User already exists", "warning");
-        return;
+    try {
+        await createUserWithEmailAndPassword(auth, email, password);
+        showToast("Account created successfully!");
+    } catch (error) {
+        showToast(error.message, "warning");
     }
-
-    const newUser = { 
-        id: Date.now(), 
-        email, 
-        password, // In a real app, never store plain text passwords
-        watchlist: [] 
-    };
-    
-    mockUsers.push(newUser);
-    localStorage.setItem('cinepro_users', JSON.stringify(mockUsers));
-    
-    showToast("Account created successfully! You can now sign in.");
-    // Switch to sign in mode automatically
-    document.getElementById('auth-toggle').click();
 }
 
 async function handleLogin(email, password) {
-    const foundUser = mockUsers.find(u => u.email === email && u.password === password);
-    
-    if (foundUser) {
-        currentUser = foundUser;
-        localStorage.setItem('cinepro_current_user', JSON.stringify(currentUser));
-        user = currentUser;
-        isLoggedIn = true;
-        
-        updateAuthUI();
-        updateWatchlistBadge();
-        document.getElementById('login-modal').style.display = 'none';
-        showToast(`Welcome back, ${user.email.split('@')[0]}!`);
-    } else {
+    try {
+        await signInWithEmailAndPassword(auth, email, password);
+    } catch (error) {
         showToast("Invalid email or password", "warning");
     }
 }
 
 async function handleLogout() {
     if (confirm("Are you sure you want to sign out?")) {
-        currentUser = null;
-        localStorage.removeItem('cinepro_current_user');
-        user = null;
-        isLoggedIn = false;
-        updateAuthUI();
-        showToast("Signed out successfully!");
+        try {
+            await signOut(auth);
+            showToast("Signed out successfully!");
+        } catch (error) {
+            showToast(error.message, "warning");
+        }
     }
 }
 
@@ -650,7 +643,7 @@ function handleWatchlist(movie) {
 }
 
 function saveWatchlist() {
-    localStorage.setItem('watchlist_items', JSON.stringify(watchlist));
+    localStorage.setItem('cinepro_watchlist', JSON.stringify(watchlist));
 }
 
 function updateWatchlistBadge() {
