@@ -101,6 +101,48 @@ function renderMovieDetails(movie) {
     meta.innerHTML = `<span>★ ${movie.rating}</span> <span>${movie.year}</span> <span class="badge">${movie.type}</span> <span>Dir: ${movie.director}</span>`;
     description.innerText = movie.description;
 
+    // --- Dynamic SEO Updates ---
+    document.title = `${movie.title} (${movie.year}) | CinePro Reviews & Trailer`;
+    const seoDesc = document.getElementById('seo-description');
+    const seoKeywords = document.getElementById('seo-keywords');
+    const ogTitle = document.querySelector('meta[property="og:title"]');
+    const ogDesc = document.querySelector('meta[property="og:description"]');
+    const ogImage = document.querySelector('meta[property="og:image"]');
+
+    if (seoDesc) seoDesc.content = `${movie.title} review: ${movie.description.substring(0, 150)}... Watch trailer and see where to stream.`;
+    if (seoKeywords) seoKeywords.content = `${movie.title}, ${movie.director}, movie review, ${movie.genre}, trailer, where to watch ${movie.title}`;
+    if (ogTitle) ogTitle.content = `${movie.title} - CinePro Movie Review`;
+    if (ogDesc) ogDesc.content = movie.description;
+    if (ogImage) ogImage.content = movie.poster;
+
+    // --- JSON-LD for Search Engines ---
+    let schemaScript = document.getElementById('movie-schema');
+    if (!schemaScript) {
+        schemaScript = document.createElement('script');
+        schemaScript.id = 'movie-schema';
+        schemaScript.type = 'application/ld+json';
+        document.head.appendChild(schemaScript);
+    }
+    const schemaData = {
+        "@context": "https://schema.org",
+        "@type": "Movie",
+        "name": movie.title,
+        "image": movie.poster,
+        "datePublished": movie.year,
+        "director": {
+            "@type": "Person",
+            "name": movie.director
+        },
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": movie.rating,
+            "bestRating": "10",
+            "ratingCount": "100"
+        },
+        "description": movie.description
+    };
+    schemaScript.textContent = JSON.stringify(schemaData);
+
     updateThemeColor(movie.poster);
 
     // Render Cast
