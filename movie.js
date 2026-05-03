@@ -75,10 +75,19 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 async function loadDatabase() {
     try {
-        const response = await fetch('./movies.json');
-        allMovies = await response.json();
+        const q = query(collection(db, "movies"), orderBy("createdAt", "desc"));
+        const querySnapshot = await getDocs(q);
+        
+        if (!querySnapshot.empty) {
+            allMovies = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+            console.log("Loaded movies from Firestore");
+        } else {
+            const response = await fetch('./movies.json');
+            allMovies = await response.json();
+            console.log("Loaded movies from local JSON (fallback)");
+        }
     } catch (error) {
-        console.error('Error loading movies:', error);
+        console.error('Error loading database:', error);
     }
 }
 

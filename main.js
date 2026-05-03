@@ -1,5 +1,6 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged } from 'firebase/auth';
+import { getFirestore, collection, addDoc, getDocs, query, orderBy, limit, serverTimestamp } from 'firebase/firestore';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -17,19 +18,48 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+const db = getFirestore(app);
 
 let allMovies = [];
 let user = null; 
 
 async function loadDatabase() {
     try {
-        const response = await fetch('./movies.json');
-        if (!response.ok) throw new Error('Database file not found');
-        allMovies = await response.json();
+        // Try fetching from Firestore first
+        const q = query(collection(db, "movies"), orderBy("createdAt", "desc"));
+        const querySnapshot = await getDocs(q);
+        
+        if (!querySnapshot.empty) {
+            allMovies = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+            console.log("Loaded movies from Firestore");
+        } else {
+            // Fallback to local JSON if Firestore is empty (Initial migration)
+            console.log("Firestore empty, falling back to local JSON");
+            const response = await fetch('./movies.json');
+            allMovies = await response.json();
+            // Automatically trigger migration if user is admin or on first run
+            // await migrateToFirestore(allMovies); 
+        }
     } catch (error) {
         console.error('Failed to load database:', error);
         showToast("Error: Database connection failed. Please try later.", "warning");
     }
+}
+
+// Helper to move local data to Firestore (Run once)
+async function migrateToFirestore(data) {
+    console.log("Migrating data to Firestore...");
+    for (const movie of data) {
+        try {
+            await addDoc(collection(db, "movies"), {
+                ...movie,
+                createdAt: serverTimestamp()
+            });
+        } catch (e) {
+            console.error("Migration error:", e);
+        }
+    }
+    console.log("Migration complete!");
 }
 
 
@@ -845,7 +875,7 @@ function initAdminDashboard() {
     exportBtn.addEventListener('click', exportDatabaseJSON);
 }
 
-function addMovieFromAdmin() {
+async function addMovieFromAdmin() {
     const title = document.getElementById('admin-title').value;
     const year = document.getElementById('admin-year').value;
     const rating = document.getElementById('admin-rating').value;
@@ -857,6 +887,10 @@ function addMovieFromAdmin() {
     const description = document.getElementById('admin-description').value;
     const castRaw = document.getElementById('admin-cast').value;
 
+    const submitBtn = document.querySelector('#admin-form button[type="submit"]');
+    submitBtn.disabled = true;
+    submitBtn.innerText = "Adding to Database...";
+
     // Process cast
     const cast = castRaw.split(',').map(item => {
         const [name, role] = item.split(':');
@@ -864,23 +898,29 @@ function addMovieFromAdmin() {
     });
 
     const newMovie = {
-        id: Date.now(), // Unique ID based on timestamp
         title, year, rating, type, genre, director, poster, 
         trailerId: trailer,
         description,
-        cast
+        cast,
+        createdAt: serverTimestamp()
     };
 
-    allMovies.unshift(newMovie); // Add to the top
-    renderFilteredGrids(); // Re-render everything
-    
-    document.getElementById('admin-modal').style.display = 'none';
-    document.getElementById('admin-form').reset();
-    showToast(`"${title}" added to your local database!`);
-    
-    // Smooth scroll to the new movie's section
-    const targetSection = document.getElementById(`${type}-section`) || document.querySelector('main');
-    targetSection.scrollIntoView({ behavior: 'smooth' });
+    try {
+        const docRef = await addDoc(collection(db, "movies"), newMovie);
+        allMovies.unshift({ id: docRef.id, ...newMovie });
+        
+        renderFilteredGrids(); // Re-render everything
+        
+        document.getElementById('admin-modal').style.display = 'none';
+        document.getElementById('admin-form').reset();
+        showToast(`"${title}" added to Global Database!`);
+    } catch (e) {
+        console.error("Error adding document: ", e);
+        showToast("Error adding movie. Check console.", "warning");
+    } finally {
+        submitBtn.disabled = false;
+        submitBtn.innerText = "Add Movie";
+    }
 }
 
 function exportDatabaseJSON() {
