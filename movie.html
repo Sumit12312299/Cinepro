@@ -72,6 +72,33 @@
                     <h3>More Like This</h3>
                     <div id="similar-grid" class="similar-grid"></div>
                 </div>
+
+                <div class="reviews-section">
+                    <h3>User Reviews</h3>
+                    <div id="auth-status-review" class="auth-message">
+                        Please <button class="btn-signin" style="padding: 4px 10px; font-size: 0.8rem;">Sign In</button> to write a review.
+                    </div>
+                    <form id="review-form" class="review-form" style="display: none;">
+                        <textarea id="review-text" placeholder="Write your thoughts about this movie..." required></textarea>
+                        <div class="form-footer">
+                            <div class="rating-input">
+                                <span>Rating:</span>
+                                <div id="star-input" class="star-rating">
+                                    <span class="star" data-value="1">★</span>
+                                    <span class="star" data-value="2">★</span>
+                                    <span class="star" data-value="3">★</span>
+                                    <span class="star" data-value="4">★</span>
+                                    <span class="star" data-value="5">★</span>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn-play">Post Review</button>
+                        </div>
+                    </form>
+                    <div id="reviews-list" class="reviews-list">
+                        <!-- Reviews will be loaded here -->
+                        <div class="loader-shimmer"></div>
+                    </div>
+                </div>
             </div>
         </div>
     </main>

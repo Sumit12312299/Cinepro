@@ -60,8 +60,27 @@ document.addEventListener('DOMContentLoaded', async () => {
     initSearch(); // Initialize Search
     initThemeToggle(); // Initialize Theme Toggle
     initScrollAnimations(); // Initialize ScrollTrigger
+    initFilters(); // Initialize Filters
+    
+    // Check for search param in URL (for Cast pages redirection)
+    const urlParams = new URLSearchParams(window.location.search);
+    const searchQuery = urlParams.get('search');
+    if (searchQuery) {
+        document.getElementById('search-input').value = searchQuery;
+        renderFilteredGrids(searchQuery.toLowerCase());
+    }
+
     updateWatchlistBadge(); // Ensure badge is updated immediately
     // Auth state listener handles the UI
+
+    // Service Worker Registration for PWA
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('/sw.js')
+                .then(reg => console.log('SW Registered'))
+                .catch(err => console.log('SW Failed', err));
+        });
+    }
 });
 
 // --- Hero Carousel Logic ---
@@ -242,6 +261,32 @@ function initGenreMenu() {
 }
 
 // --- Search Logic ---
+function initFilters() {
+    const genreSelect = document.getElementById('filter-genre');
+    const yearSelect = document.getElementById('filter-year');
+    const ratingSelect = document.getElementById('filter-rating');
+
+    // Populate Genres
+    const sortedGenres = [...genres].sort();
+    genreSelect.innerHTML += sortedGenres.map(g => `<option value="${g}">${g}</option>`).join('');
+
+    // Populate Years
+    const years = [...new Set(allMovies.map(m => m.year.substring(0, 4)))].sort((a, b) => b - a);
+    yearSelect.innerHTML += years.map(y => `<option value="${y}">${y}</option>`).join('');
+
+    const handleFilter = () => {
+        const genre = genreSelect.value;
+        const year = yearSelect.value;
+        const rating = ratingSelect.value;
+        
+        renderFilteredGrids(null, genre, year, rating);
+    };
+
+    genreSelect.addEventListener('change', handleFilter);
+    yearSelect.addEventListener('change', handleFilter);
+    ratingSelect.addEventListener('change', handleFilter);
+}
+
 function initSearch() {
     const searchInput = document.getElementById('search-input');
     const mobileSearchInput = document.getElementById('mobile-search-input');
@@ -255,7 +300,7 @@ function initSearch() {
     if (mobileSearchInput) mobileSearchInput.addEventListener('input', handleSearch);
 }
 
-function renderFilteredGrids(query = null, genre = null) {
+function renderFilteredGrids(query = null, genre = null, year = null, rating = null) {
     const featuredGrid = document.getElementById('featured-grid');
     const popularGrid = document.getElementById('popular-grid');
     const webSeriesGrid = document.getElementById('webseries-grid');
@@ -263,9 +308,15 @@ function renderFilteredGrids(query = null, genre = null) {
     const bollywoodGrid = document.getElementById('bollywood-grid');
 
     const filterFn = (item) => {
-        const matchesQuery = query ? item.title.toLowerCase().includes(query) : true;
-        const matchesGenre = genre ? item.genre === genre : true;
-        return matchesQuery && matchesGenre;
+        const matchesQuery = query ? (
+            item.title.toLowerCase().includes(query) || 
+            item.cast.some(actor => actor.name.toLowerCase().includes(query)) ||
+            item.director.toLowerCase().includes(query)
+        ) : true;
+        const matchesGenre = genre ? item.genre.includes(genre) : true;
+        const matchesYear = year ? item.year.startsWith(year) : true;
+        const matchesRating = rating ? parseFloat(item.rating) >= parseFloat(rating) : true;
+        return matchesQuery && matchesGenre && matchesYear && matchesRating;
     };
 
     const updateGrid = (grid, type) => {
@@ -362,6 +413,12 @@ function renderGrids() {
     const animeGrid = document.getElementById('anime-grid');
     const bollywoodGrid = document.getElementById('bollywood-grid');
 
+    // Tab Logic
+    const tabs = document.querySelectorAll('.tab-btn');
+    tabs.forEach((btn, index) => {
+        btn.addEventListener('click', () => handleTabClick(btn, index));
+    });
+
     if (featuredGrid) {
         allMovies.filter(m => m.type === 'featured').forEach(movie => {
             featuredGrid.appendChild(createMovieCard(movie));
@@ -382,6 +439,29 @@ function renderGrids() {
     }
     if (bollywoodGrid) {
         allMovies.filter(m => m.type === 'bollywood').forEach(movie => bollywoodGrid.appendChild(createMovieCard(movie)));
+    }
+}
+
+function handleTabClick(btn, index) {
+    const tabs = document.querySelectorAll('.tab-btn');
+    tabs.forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+    
+    const trendingGrid = document.getElementById('featured-grid');
+    if (index === 1) { // Charts
+        const topRated = [...allMovies].sort((a, b) => b.rating - a.rating).slice(0, 10);
+        trendingGrid.innerHTML = '';
+        topRated.forEach((movie, i) => {
+            const card = createMovieCard(movie);
+            card.innerHTML += `<div class="rank-badge">#${i + 1}</div>`;
+            trendingGrid.appendChild(card);
+            gsap.to(card, { opacity: 1, y: 0, duration: 0.5, delay: i * 0.1 });
+        });
+    } else {
+        trendingGrid.innerHTML = '';
+        allMovies.filter(m => m.type === 'featured').forEach(movie => {
+            trendingGrid.appendChild(createMovieCard(movie));
+        });
     }
 }
 
@@ -462,6 +542,30 @@ function createMovieCard(movie) {
 
     card.addEventListener('click', () => {
         window.location.href = `movie.html?id=${movie.id}`;
+    });
+
+    // Auto-play trailer on hover
+    let hoverTimeout;
+    card.addEventListener('mouseenter', () => {
+        hoverTimeout = setTimeout(() => {
+            const poster = card.querySelector('.card-poster');
+            const videoId = movie.trailerId;
+            if (videoId) {
+                const iframe = document.createElement('iframe');
+                iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&controls=0&modestbranding=1&rel=0`;
+                iframe.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;border:none;pointer-events:none;z-index:5;';
+                poster.appendChild(iframe);
+                gsap.from(iframe, { opacity: 0, duration: 0.5 });
+            }
+        }, 800); // Only play if hovered for 800ms
+    });
+
+    card.addEventListener('mouseleave', () => {
+        clearTimeout(hoverTimeout);
+        const iframe = card.querySelector('iframe');
+        if (iframe) {
+            gsap.to(iframe, { opacity: 0, duration: 0.3, onComplete: () => iframe.remove() });
+        }
     });
     
     return card;

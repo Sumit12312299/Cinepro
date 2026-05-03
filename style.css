@@ -572,6 +572,37 @@ h1, h2, h3, .nav-logo {
     gap: 20px;
 }
 
+.filter-bar {
+    display: flex;
+    gap: 15px;
+    background: var(--glass);
+    padding: 8px;
+    border-radius: 12px;
+    border: 1px solid var(--glass-border);
+}
+
+.filter-select {
+    background: transparent;
+    border: none;
+    color: var(--text-main);
+    font-size: 0.85rem;
+    font-weight: 600;
+    outline: none;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 8px;
+    transition: 0.3s;
+}
+
+.filter-select:hover {
+    background: var(--glass-border);
+}
+
+.filter-select option {
+    background: var(--bg-surface);
+    color: white;
+}
+
 .tab-btn {
     background: transparent;
     border: none;
@@ -614,9 +645,36 @@ h1, h2, h3, .nav-logo {
     transform: translateY(30px);
 }
 
+.movie-card.skeleton {
+    background: linear-gradient(90deg, var(--bg-surface) 25%, var(--glass-border) 50%, var(--bg-surface) 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    pointer-events: none;
+    opacity: 1;
+}
+
+.movie-card.skeleton * {
+    visibility: hidden;
+}
+
 .movie-card:hover {
     transform: translateY(-10px) scale(1.02);
     box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+}
+
+.rank-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: var(--primary);
+    color: black;
+    font-weight: 900;
+    font-size: 1.2rem;
+    padding: 5px 12px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    z-index: 10;
+    font-family: 'Outfit', sans-serif;
 }
 
 .card-poster {
@@ -1046,6 +1104,131 @@ h1, h2, h3, .nav-logo {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 25px;
+}
+
+/* User Reviews Section */
+.reviews-section {
+    margin-top: 5rem;
+}
+
+.auth-message {
+    background: var(--glass);
+    padding: 1.5rem;
+    border-radius: 12px;
+    border: 1px solid var(--glass-border);
+    margin-bottom: 2rem;
+    color: var(--text-muted);
+}
+
+.review-form {
+    background: var(--bg-surface);
+    border: 1px solid var(--glass-border);
+    padding: 2rem;
+    border-radius: 15px;
+    margin-bottom: 3rem;
+}
+
+.review-form textarea {
+    width: 100%;
+    background: var(--bg-dark);
+    border: 1px solid var(--glass-border);
+    border-radius: 10px;
+    padding: 1.5rem;
+    color: white;
+    font-family: inherit;
+    font-size: 1rem;
+    outline: none;
+    resize: none;
+    min-height: 120px;
+    margin-bottom: 1.5rem;
+}
+
+.review-form textarea:focus {
+    border-color: var(--primary);
+}
+
+.form-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.rating-input {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    color: var(--text-muted);
+}
+
+.reviews-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.review-card {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    padding: 2rem;
+    border-radius: 15px;
+    animation: fadeIn 0.5s ease-out;
+}
+
+.review-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.user-avatar {
+    width: 40px;
+    height: 40px;
+    background: var(--primary);
+    color: black;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 800;
+}
+
+.user-email {
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+
+.review-date {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.review-text {
+    line-height: 1.6;
+    color: rgba(255,255,255,0.9);
+}
+
+.loader-shimmer {
+    height: 100px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    border-radius: 15px;
+}
+
+@keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 /* Modal Adjustments */

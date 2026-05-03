@@ -1,4 +1,23 @@
 import { gsap } from 'gsap';
+import { initializeApp } from 'firebase/app';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { getFirestore, collection, addDoc, query, where, getDocs, orderBy, serverTimestamp } from 'firebase/firestore';
+
+const firebaseConfig = {
+    apiKey: "AIzaSyBvZktK1hJew86anYsGS25uYF6O1gpFd34",
+    authDomain: "cinepro-8b537.firebaseapp.com",
+    projectId: "cinepro-8b537",
+    storageBucket: "cinepro-8b537.firebasestorage.app",
+    messagingSenderId: "279721685100",
+    appId: "1:279721685100:web:adea4327a9ad49b4c0e849",
+    measurementId: "G-3M3G2WTXVL"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+let currentUser = null;
 
 let allMovies = [];
 const watchlist = JSON.parse(localStorage.getItem('cinepro_watchlist')) || [];
@@ -31,7 +50,27 @@ document.addEventListener('DOMContentLoaded', async () => {
     initWatchlistLogic();
     initModal();
     initThemeToggle();
+    initThemeToggle();
     updateWatchlistBadge();
+
+    // Firebase Auth Listener
+    onAuthStateChanged(auth, (user) => {
+        currentUser = user;
+        const authMessage = document.getElementById('auth-status-review');
+        const reviewForm = document.getElementById('review-form');
+        
+        if (user) {
+            authMessage.style.display = 'none';
+            reviewForm.style.display = 'block';
+        } else {
+            authMessage.style.display = 'block';
+            reviewForm.style.display = 'none';
+        }
+    });
+
+    if (id) {
+        initReviewSystem(id);
+    }
 });
 
 async function loadDatabase() {
@@ -62,9 +101,11 @@ function renderMovieDetails(movie) {
     meta.innerHTML = `<span>★ ${movie.rating}</span> <span>${movie.year}</span> <span class="badge">${movie.type}</span> <span>Dir: ${movie.director}</span>`;
     description.innerText = movie.description;
 
+    updateThemeColor(movie.poster);
+
     // Render Cast
     castGallery.innerHTML = movie.cast.map(actor => `
-        <div class="cast-card">
+        <div class="cast-card" onclick="window.location.href='index.html?search=${actor.name}'" style="cursor: pointer;">
             <div class="cast-avatar">${actor.name.charAt(0)}</div>
             <div class="cast-info">
                 <h4>${actor.name}</h4>
@@ -269,4 +310,140 @@ function showToast(message) {
     toast.innerHTML = `<span>✓</span> ${message}`;
     container.appendChild(toast);
     setTimeout(() => toast.remove(), 3000);
+}
+
+// --- Review System Functions ---
+function initReviewSystem(movieId) {
+    const form = document.getElementById('review-form');
+    const stars = document.querySelectorAll('#star-input .star');
+    let selectedRating = 5;
+
+    stars.forEach(star => {
+        star.addEventListener('click', () => {
+            selectedRating = star.dataset.value;
+            stars.forEach(s => {
+                s.classList.toggle('active', s.dataset.value <= selectedRating);
+            });
+        });
+    });
+
+    form.onsubmit = async (e) => {
+        e.preventDefault();
+        if (!currentUser) return;
+
+        const text = document.getElementById('review-text').value;
+        const submitBtn = form.querySelector('button[type="submit"]');
+        submitBtn.disabled = true;
+        submitBtn.innerText = "Posting...";
+
+        try {
+            await addDoc(collection(db, "reviews"), {
+                movieId: movieId,
+                userId: currentUser.uid,
+                userEmail: currentUser.email,
+                text: text,
+                rating: selectedRating,
+                createdAt: serverTimestamp()
+            });
+
+            form.reset();
+            selectedRating = 5;
+            stars.forEach(s => s.classList.add('active'));
+            showToast("Review posted successfully!");
+            loadReviews(movieId);
+        } catch (error) {
+            console.error("Error adding review: ", error);
+            alert("Failed to post review. Please try again.");
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.innerText = "Post Review";
+        }
+    };
+
+    loadReviews(movieId);
+}
+
+async function loadReviews(movieId) {
+    const container = document.getElementById('reviews-list');
+    const q = query(collection(db, "reviews"), where("movieId", "==", movieId), orderBy("createdAt", "desc"));
+
+    try {
+        const querySnapshot = await getDocs(q);
+        container.innerHTML = '';
+
+        if (querySnapshot.empty) {
+            container.innerHTML = '<p class="text-muted" style="text-align: center; padding: 2rem;">No reviews yet. Be the first to review!</p>';
+            return;
+        }
+
+        querySnapshot.forEach((doc) => {
+            const data = doc.data();
+            const date = data.createdAt ? new Date(data.createdAt.seconds * 1000).toLocaleDateString() : 'Just now';
+            const card = document.createElement('div');
+            card.className = 'review-card';
+            card.innerHTML = `
+                <div class="review-header">
+                    <div class="user-info">
+                        <div class="user-avatar">${data.userEmail.charAt(0).toUpperCase()}</div>
+                        <div class="user-email">${data.userEmail.split('@')[0]}</div>
+                    </div>
+                    <div class="review-date">${date}</div>
+                </div>
+                <div class="star-rating" style="margin-bottom: 10px;">
+                    ${Array.from({length: 5}, (_, i) => `<span class="star ${i < data.rating ? 'active' : ''}">★</span>`).join('')}
+                </div>
+                <div class="review-text">${data.text}</div>
+            `;
+            container.appendChild(card);
+        });
+    } catch (error) {
+        console.error("Error loading reviews: ", error);
+        container.innerHTML = '<p class="text-muted">Failed to load reviews.</p>';
+    }
+}
+
+function updateThemeColor(posterUrl) {
+    const img = new Image();
+    img.crossOrigin = "Anonymous";
+    img.src = posterUrl;
+    img.onload = () => {
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = 10;
+        canvas.height = 10;
+        ctx.drawImage(img, 0, 0, 10, 10);
+        const data = ctx.getImageData(0, 0, 10, 10).data;
+        
+        let r = 0, g = 0, b = 0;
+        for (let i = 0; i < data.length; i += 4) {
+            r += data[i];
+            g += data[i+1];
+            b += data[i+2];
+        }
+        r = Math.floor(r / (data.length / 4));
+        g = Math.floor(g / (data.length / 4));
+        b = Math.floor(b / (data.length / 4));
+        
+        // Adjust brightness/saturation for primary color
+        const hsl = rgbToHsl(r, g, b);
+        document.documentElement.style.setProperty('--primary', `hsl(${hsl[0]}, 80%, 60%)`);
+    };
+}
+
+function rgbToHsl(r, g, b) {
+    r /= 255, g /= 255, b /= 255;
+    const max = Math.max(r, g, b), min = Math.min(r, g, b);
+    let h, s, l = (max + min) / 2;
+    if (max === min) { h = s = 0; }
+    else {
+        const d = max - min;
+        s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+        switch (max) {
+            case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+            case g: h = (b - r) / d + 2; break;
+            case b: h = (r - g) / d + 4; break;
+        }
+        h /= 6;
+    }
+    return [Math.floor(h * 360), Math.floor(s * 100), Math.floor(l * 100)];
 }

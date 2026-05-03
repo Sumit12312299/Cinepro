@@ -1,0 +1,16 @@
+{
+  "name": "CinePro | Premium Movie Reviews",
+  "short_name": "CinePro",
+  "description": "Your ultimate destination for premium movie reviews and trailers.",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#f5c518",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml"
+    }
+  ]
+}
