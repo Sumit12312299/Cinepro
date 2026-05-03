@@ -340,5 +340,165 @@
             {"name": "Yash", "role": "Ravana"},
             {"name": "Sunny Deol", "role": "Hanuman"}
         ]
+    },
+    {
+        "id": 205,
+        "title": "Jujutsu Kaisen: The Culling Game",
+        "year": "2026",
+        "rating": "9.6",
+        "poster": "jjk_s3_poster_1777792164017.png",
+        "trailerId": "X_p7f6A0V-s",
+        "genre": "Action, Supernatural",
+        "type": "anime",
+        "director": "Various",
+        "description": "The Culling Game begins. Sorcerers and non-sorcerers alike are thrust into a deadly battle royale across Japan, as Sukuna's plans finally come to fruition.",
+        "cast": [
+            {"name": "Junya Enoki", "role": "Yuji Itadori"},
+            {"name": "Yuma Uchida", "role": "Megumi Fushiguro"},
+            {"name": "Yuichi Nakamura", "role": "Satoru Gojo"}
+        ]
+    },
+    {
+        "id": 206,
+        "title": "Frieren: Beyond Journey's End S2",
+        "year": "2026",
+        "rating": "9.5",
+        "poster": "frieren_s2_poster_1777792184507.png",
+        "trailerId": "qEVUrkdcxs4",
+        "genre": "Fantasy, Adventure",
+        "type": "anime",
+        "director": "Keiichiro Saito",
+        "description": "Frieren continues her journey to Aureole, the land where souls rest, exploring the depths of human emotion and the legacy of her former companions.",
+        "cast": [
+            {"name": "Atsumi Tanezaki", "role": "Frieren"},
+            {"name": "Kana Ichinose", "role": "Fern"},
+            {"name": "Chiaki Kobayashi", "role": "Stark"}
+        ]
+    },
+    {
+        "id": 207,
+        "title": "Re:ZERO -Starting Life in Another World- S4",
+        "year": "2026",
+        "rating": "9.3",
+        "poster": "rezero_s4_poster_1777792206173.png",
+        "trailerId": "EXeTwQWrcwY",
+        "genre": "Fantasy, Psychological",
+        "type": "anime",
+        "director": "Various",
+        "description": "Subaru Natsuki faces his greatest challenge yet as the royal selection intensifies and the Witch's Cult reveals its ultimate goal.",
+        "cast": [
+            {"name": "Yusuke Kobayashi", "role": "Subaru Natsuki"},
+            {"name": "Rie Takahashi", "role": "Emilia"},
+            {"name": "Inori Minase", "role": "Rem"}
+        ]
+    },
+    {
+        "id": 208,
+        "title": "[OSHI NO KO] Season 3",
+        "year": "2026",
+        "rating": "9.2",
+        "poster": "oshinoko_s3_poster_1777792225072.png",
+        "trailerId": "shW9i6k8cB0",
+        "genre": "Drama, Music",
+        "type": "anime",
+        "director": "Daisuke Hiramaki",
+        "description": "The entertainment industry's dark secrets continue to unravel as Aqua and Ruby navigate their way through fame and vengeance.",
+        "cast": [
+            {"name": "Takeo Otsuka", "role": "Aqua Hoshino"},
+            {"name": "Yurie Igoma", "role": "Ruby Hoshino"}
+        ]
+    },
+    {
+        "id": 209,
+        "title": "That Time I Got Reincarnated as a Slime S4",
+        "year": "2026",
+        "rating": "9.0",
+        "poster": "slime_s4_poster_1777792250396.png",
+        "trailerId": "uYPbbksJxIg",
+        "genre": "Fantasy, Isekai",
+        "type": "anime",
+        "director": "Atsushi Nakayama",
+        "description": "Rimuru Tempest expands his influence across the world, facing new political challenges and powerful adversaries from the East.",
+        "cast": [
+            {"name": "Miho Okasaki", "role": "Rimuru Tempest"},
+            {"name": "Makoto Furukawa", "role": "Benimaru"}
+        ]
+    },
+    {
+        "id": 210,
+        "title": "Hell's Paradise Season 2",
+        "year": "2026",
+        "rating": "8.8",
+        "poster": "hells_paradise_s2_poster_1777792276433.png",
+        "trailerId": "ByXuk9QqQkk",
+        "genre": "Action, Dark Fantasy",
+        "type": "anime",
+        "director": "Kaori Makita",
+        "description": "The search for the Elixir of Life continues on the mysterious island, as the remaining executioners and convicts face the true power of the Tensen.",
+        "cast": [
+            {"name": "Chiaki Kobayashi", "role": "Gabimaru"},
+            {"name": "Yumiri Hanamori", "role": "Sagiri"}
+        ]
+    },
+    {
+        "id": 211,
+        "title": "Witch Hat Atelier",
+        "year": "2026",
+        "rating": "9.4",
+        "poster": "witch_hat_atelier_poster_1777792302027.png",
+        "trailerId": "giXcoGaXegM",
+        "genre": "Fantasy, Magic",
+        "type": "anime",
+        "director": "Ayumu Watanabe",
+        "description": "In a world where magic is a secret craft, a young girl named Coco discovers the truth and begins her journey to become a witch.",
+        "cast": [
+            {"name": "TBA", "role": "Coco"}
+        ]
+    },
+    {
+        "id": 212,
+        "title": "Daemons of the Shadow Realm",
+        "year": "2026",
+        "rating": "8.7",
+        "poster": "daemons_shadow_realm_poster_1777792327905.png",
+        "trailerId": "b9EkMc79ZSU",
+        "genre": "Action, Mystery",
+        "type": "anime",
+        "director": "TBA",
+        "description": "From the creator of Fullmetal Alchemist comes a new story about twins living in a secluded village and the dark secrets of the shadow realm.",
+        "cast": [
+            {"name": "TBA", "role": "Yuru"}
+        ]
+    },
+    {
+        "id": 213,
+        "title": "Fire Force Season 3",
+        "year": "2026",
+        "rating": "8.9",
+        "poster": "fire_force_s3_poster_1777792350610.png",
+        "trailerId": "uLtkt8BonwY",
+        "genre": "Action, Sci-Fi",
+        "type": "anime",
+        "director": "Various",
+        "description": "The final battle against the Evangelist begins as Company 8 uncovers the truth behind the Great Cataclysm.",
+        "cast": [
+            {"name": "Gakuto Kajiwara", "role": "Shinra Kusakabe"}
+        ]
+    },
+    {
+        "id": 214,
+        "title": "Dorohedoro Season 2",
+        "year": "2026",
+        "rating": "9.1",
+        "poster": "dorohedoro_s2_poster_1777792374547.png",
+        "trailerId": "HhesaQXLuRY",
+        "genre": "Action, Dark Comedy",
+        "type": "anime",
+        "director": "Yuichiro Hayashi",
+        "description": "Caiman and Nikaido return to the Hole, facing even stranger sorcerers and uncovering more about Caiman's mysterious past.",
+        "cast": [
+            {"name": "Wataru Takagi", "role": "Caiman"},
+            {"name": "Reina Kondo", "role": "Nikaido"}
+        ]
     }
 ]
