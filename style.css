@@ -1321,14 +1321,16 @@ h1, h2, h3, .nav-logo {
     bottom: 0;
     left: 0;
     width: 100%;
-    background: rgba(18, 18, 18, 0.8);
-    backdrop-filter: blur(20px);
-    border-top: 1px solid var(--glass-border);
-    padding: 10px 0;
+    background: rgba(20, 20, 20, 0.7); /* Transparent background */
+    backdrop-filter: blur(20px) saturate(180%); /* Premium Glass Blur */
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 12px 0;
     justify-content: space-around;
     align-items: center;
     z-index: 2000;
-    padding-bottom: env(safe-area-inset-bottom);
+    padding-bottom: calc(env(safe-area-inset-bottom) + 5px);
+    box-shadow: 0 -10px 40px rgba(0,0,0,0.5);
 }
 
 .mobile-nav-item {
@@ -1415,17 +1417,22 @@ h1, h2, h3, .nav-logo {
 
     .mobile-search-container {
         display: flex;
-        padding: 1rem 4%;
-        background: var(--bg-surface);
+        padding: 0.8rem 1rem;
+        background: rgba(18, 18, 18, 0.8);
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
         position: sticky;
         top: 0;
         z-index: 1500;
-        border-bottom: 1px solid var(--glass-border);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        gap: 10px;
     }
 
     .mobile-search-container .nav-search {
         width: 100%;
-        background: var(--glass);
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
     }
 
     .container {
@@ -1473,7 +1480,9 @@ h1, h2, h3, .nav-logo {
         margin-right: 0;
         width: 100%;
         justify-content: center;
-        padding: 0.8rem;
+        padding: 1rem; /* Larger touch target */
+        font-size: 1rem;
+        border-radius: 12px;
     }
 
     .hero-dots {

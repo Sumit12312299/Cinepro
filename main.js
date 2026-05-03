@@ -147,7 +147,7 @@ function initHeroCarousel() {
         const content = slides[currentHeroSlide].querySelector('.hero-content');
         gsap.fromTo(content.children, 
             { opacity: 0, x: -30 }, 
-            { opacity: 1, x: 0, duration: 0.8, stagger: 0.2, ease: "power2.out" }
+            { opacity: 1, x: 0, duration: window.innerWidth < 768 ? 0.5 : 0.8, stagger: 0.2, ease: "power2.out" }
         );
 
         // Reset timer and sync progress bar
@@ -336,7 +336,7 @@ function initScrollAnimations() {
             },
             opacity: 1,
             y: 0,
-            duration: 0.8,
+            duration: window.innerWidth < 768 ? 0.5 : 0.8,
             ease: "power2.out"
         });
     });
