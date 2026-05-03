@@ -3,9 +3,9 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-// --- Auth Config (Supabase Disabled) ---
-// Note: Supabase is currently disabled. Provide valid credentials to enable cloud auth.
-const supabase = null;
+// --- Local Auth System (Replaces Supabase) ---
+const mockUsers = JSON.parse(localStorage.getItem('cinepro_users') || '[]');
+let currentUser = JSON.parse(localStorage.getItem('cinepro_current_user') || 'null');
 
 let allMovies = [];
 let user = null; // Store real user object
@@ -534,60 +534,62 @@ function initAuth() {
     });
 
     // --- State Listener ---
-    if (supabase) {
-        supabase.auth.onAuthStateChange((event, session) => {
-            user = session?.user || null;
-            isLoggedIn = !!user;
-            updateAuthUI();
-            updateWatchlistBadge();
-            
-            if (event === 'SIGNED_IN') {
-                loginModal.style.display = 'none';
-                showToast(`Welcome back, ${user.email.split('@')[0]}!`);
-            } else if (event === 'SIGNED_OUT') {
-                showToast("Signed out. See you soon!");
-            }
-        });
-    } else {
-        console.warn("Supabase not configured. Auth features are limited.");
+    if (currentUser) {
+        user = currentUser;
+        isLoggedIn = true;
+        updateAuthUI();
+        updateWatchlistBadge();
     }
 }
 
 async function handleSignUp(email, password) {
-    if (!supabase) {
-        showToast("Sign up is currently disabled (Supabase not configured)", "warning");
+    const exists = mockUsers.find(u => u.email === email);
+    if (exists) {
+        showToast("User already exists", "warning");
         return;
     }
-    const { error } = await supabase.auth.signUp({ email, password });
-    if (error) {
-        showToast(error.message, "warning");
-    } else {
-        showToast("Verification email sent! Check your inbox.");
-        document.getElementById('login-modal').style.display = 'none';
-    }
+
+    const newUser = { 
+        id: Date.now(), 
+        email, 
+        password, // In a real app, never store plain text passwords
+        watchlist: [] 
+    };
+    
+    mockUsers.push(newUser);
+    localStorage.setItem('cinepro_users', JSON.stringify(mockUsers));
+    
+    showToast("Account created successfully! You can now sign in.");
+    // Switch to sign in mode automatically
+    document.getElementById('auth-toggle').click();
 }
 
 async function handleLogin(email, password) {
-    if (!supabase) {
-        showToast("Sign in is currently disabled (Supabase not configured)", "warning");
-        return;
-    }
-    const { error } = await supabase.auth.signInWithPassword({ email, password });
-    if (error) {
-        showToast(error.message, "warning");
+    const foundUser = mockUsers.find(u => u.email === email && u.password === password);
+    
+    if (foundUser) {
+        currentUser = foundUser;
+        localStorage.setItem('cinepro_current_user', JSON.stringify(currentUser));
+        user = currentUser;
+        isLoggedIn = true;
+        
+        updateAuthUI();
+        updateWatchlistBadge();
+        document.getElementById('login-modal').style.display = 'none';
+        showToast(`Welcome back, ${user.email.split('@')[0]}!`);
+    } else {
+        showToast("Invalid email or password", "warning");
     }
 }
 
 async function handleLogout() {
-    if (!supabase) {
+    if (confirm("Are you sure you want to sign out?")) {
+        currentUser = null;
+        localStorage.removeItem('cinepro_current_user');
+        user = null;
         isLoggedIn = false;
         updateAuthUI();
-        showToast("Signed out (local mode)");
-        return;
-    }
-    if (confirm("Are you sure you want to sign out?")) {
-        const { error } = await supabase.auth.signOut();
-        if (error) showToast(error.message, "warning");
+        showToast("Signed out successfully!");
     }
 }
 
