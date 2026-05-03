@@ -911,6 +911,74 @@ h1, h2, h3, .nav-logo {
     gap: 20px;
 }
 
+/* Where to Watch Section */
+.where-to-watch {
+    margin-top: 2.5rem;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--glass-border);
+    border-radius: 15px;
+    max-width: fit-content;
+}
+
+.where-to-watch h3 {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 1.2rem;
+    color: var(--primary);
+    opacity: 0.8;
+}
+
+.platform-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.platform-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 8px 18px;
+    border-radius: 30px;
+    border: 1px solid var(--glass-border);
+    transition: var(--transition-smooth);
+    cursor: default;
+}
+
+.platform-item:hover {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: black;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(245, 197, 24, 0.3);
+}
+
+.platform-icon {
+    width: 20px;
+    height: 20px;
+    background: var(--primary);
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    font-weight: 800;
+    font-size: 0.65rem;
+}
+
+.platform-item:hover .platform-icon {
+    background: black;
+    color: var(--primary);
+}
+
+.platform-name {
+    font-size: 0.85rem;
+    font-weight: 700;
+}
+
 /* Cast Section */
 .cast-section {
     margin-bottom: 5rem;

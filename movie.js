@@ -80,6 +80,19 @@ function renderMovieDetails(movie) {
     const isInWatchlist = watchlist.some(m => m.id === movie.id);
     updateWatchlistBtn(watchlistBtn, isInWatchlist);
     watchlistBtn.onclick = () => toggleWatchlist(movie, watchlistBtn);
+
+    // Render Where to Watch
+    const platformList = document.getElementById('platform-list');
+    if (movie.streaming && movie.streaming.length > 0) {
+        platformList.innerHTML = movie.streaming.map(p => `
+            <div class="platform-item">
+                <span class="platform-icon">${p.charAt(0)}</span>
+                <span class="platform-name">${p}</span>
+            </div>
+        `).join('');
+    } else {
+        platformList.innerHTML = '<p class="text-muted" style="font-size: 0.9rem;">Not currently streaming.</p>';
+    }
 }
 
 function renderSimilarMovies(currentMovie) {

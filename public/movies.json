@@ -15,7 +15,8 @@
             {"name": "Vincent D'Onofrio", "role": "Wilson Fisk"},
             {"name": "Deborah Ann Woll", "role": "Karen Page"},
             {"name": "Elden Henson", "role": "Foggy Nelson"}
-        ]
+        ],
+        "streaming": ["Disney+", "Hotstar"]
     },
     {
         "id": 2,
@@ -33,7 +34,8 @@
             {"name": "Heath Ledger", "role": "The Joker"},
             {"name": "Gary Oldman", "role": "James Gordon"},
             {"name": "Morgan Freeman", "role": "Lucius Fox"}
-        ]
+        ],
+        "streaming": ["Netflix", "Amazon Prime", "JioCinema"]
     },
     {
         "id": 3,
@@ -51,7 +53,8 @@
             {"name": "Joseph Gordon-Levitt", "role": "Arthur"},
             {"name": "Elliot Page", "role": "Ariadne"},
             {"name": "Tom Hardy", "role": "Eames"}
-        ]
+        ],
+        "streaming": ["Netflix", "JioCinema"]
     },
     {
         "id": 4,
@@ -105,7 +108,8 @@
             {"name": "Donnie Yen", "role": "Caine"},
             {"name": "Bill Skarsgard", "role": "Marquis"},
             {"name": "Laurence Fishburne", "role": "Bowery King"}
-        ]
+        ],
+        "streaming": ["Netflix", "Lionsgate Play"]
     },
     {
         "id": 7,
@@ -123,7 +127,8 @@
             {"name": "Anne Hathaway", "role": "Brand"},
             {"name": "Jessica Chastain", "role": "Murphy"},
             {"name": "Michael Caine", "role": "Professor Brand"}
-        ]
+        ],
+        "streaming": ["Netflix", "Amazon Prime"]
     },
     {
         "id": 8,
@@ -159,7 +164,8 @@
             {"name": "David Harbour", "role": "Jim Hopper"},
             {"name": "Finn Wolfhard", "role": "Mike Wheeler"},
             {"name": "Millie Bobby Brown", "role": "Eleven"}
-        ]
+        ],
+        "streaming": ["Netflix"]
     },
     {
         "id": 102,
