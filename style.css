@@ -1412,6 +1412,88 @@ h1, h2, h3, .nav-logo {
     .detail-actions {
         justify-content: center;
     }
+
+    .mobile-search-container {
+        display: flex;
+        padding: 1rem 4%;
+        background: var(--bg-surface);
+        position: sticky;
+        top: 0;
+        z-index: 1500;
+        border-bottom: 1px solid var(--glass-border);
+    }
+
+    .mobile-search-container .nav-search {
+        width: 100%;
+        background: var(--glass);
+    }
+
+    .container {
+        margin: 2rem auto;
+    }
+
+    .hero {
+        height: auto;
+        min-height: 60vh;
+        padding-top: 40px;
+    }
+
+    .hero-content {
+        padding: 2rem;
+        position: relative;
+        text-align: center;
+    }
+
+    .hero-content h2 {
+        font-size: 2.5rem;
+    }
+
+    .hero-actions {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        margin-top: 20px;
+    }
+
+    .hero-actions button {
+        margin-right: 0;
+        width: 100%;
+        justify-content: center;
+        padding: 0.8rem;
+    }
+
+    .hero-dots {
+        bottom: 1rem;
+        right: 50%;
+        transform: translateX(50%);
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-content h2 {
+        font-size: 1.8rem;
+    }
+    
+    .movie-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 12px;
+    }
+
+    .card-poster {
+        height: 220px;
+    }
+
+    .section-header h2 {
+        font-size: 1.2rem;
+    }
+    
+    .tab-btn {
+        font-size: 0.8rem;
+    }
+}
+
+.mobile-search-container {
+    display: none;
 }
 
 

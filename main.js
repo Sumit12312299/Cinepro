@@ -231,13 +231,16 @@ function initGenreMenu() {
 
 // --- Search Logic ---
 function initSearch() {
-    const searchInput = document.querySelector('.nav-search input');
-    if (!searchInput) return;
+    const searchInput = document.getElementById('search-input');
+    const mobileSearchInput = document.getElementById('mobile-search-input');
 
-    searchInput.addEventListener('input', (e) => {
+    const handleSearch = (e) => {
         const query = e.target.value.toLowerCase();
         renderFilteredGrids(query);
-    });
+    };
+
+    if (searchInput) searchInput.addEventListener('input', handleSearch);
+    if (mobileSearchInput) mobileSearchInput.addEventListener('input', handleSearch);
 }
 
 function renderFilteredGrids(query = null, genre = null) {
@@ -806,7 +809,7 @@ function initMobileNav() {
             if (id === 'mobile-nav-home') {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             } else if (id === 'mobile-nav-search') {
-                const searchInput = document.querySelector('.nav-search input');
+                const searchInput = document.getElementById('mobile-search-input') || document.querySelector('.nav-search input');
                 if (searchInput) {
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                     setTimeout(() => searchInput.focus(), 500);
