@@ -25,7 +25,6 @@ let user = null;
 
 async function loadDatabase() {
     try {
-        // Try fetching from Firestore first
         const q = query(collection(db, "movies"), orderBy("createdAt", "desc"));
         const querySnapshot = await getDocs(q);
         
@@ -33,32 +32,31 @@ async function loadDatabase() {
             allMovies = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
             console.log("Loaded movies from Firestore");
         } else {
-            // Fallback to local JSON if Firestore is empty (Initial migration)
             console.log("Firestore empty, falling back to local JSON");
             const response = await fetch('./movies.json');
             allMovies = await response.json();
-            // Automatically trigger migration if Firestore is empty
-            await migrateToFirestore(allMovies); 
+            
+            // Trigger migration in background (DON'T AWAIT)
+            migrateToFirestore(allMovies); 
         }
     } catch (error) {
         console.error('Failed to load database:', error);
-        showToast("Error: Database connection failed. Please try later.", "warning");
+        showToast("Database connection failed. Loading local fallback...", "warning");
+        const response = await fetch('./movies.json');
+        allMovies = await response.json();
     }
 }
 
 // Helper to move local data to Firestore (Run once)
 async function migrateToFirestore(data) {
     console.log("Migrating data to Firestore...");
-    for (const movie of data) {
-        try {
-            await addDoc(collection(db, "movies"), {
-                ...movie,
-                createdAt: serverTimestamp()
-            });
-        } catch (e) {
-            console.error("Migration error:", e);
-        }
-    }
+    const promises = data.map(movie => {
+        return addDoc(collection(db, "movies"), {
+            ...movie,
+            createdAt: serverTimestamp()
+        }).catch(e => console.error("Migration error for:", movie.title, e));
+    });
+    await Promise.all(promises);
     console.log("Migration complete!");
 }
 
