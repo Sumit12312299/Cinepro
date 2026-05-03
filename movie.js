@@ -23,33 +23,31 @@ let allMovies = [];
 const watchlist = JSON.parse(localStorage.getItem('cinepro_watchlist')) || [];
 
 document.addEventListener('DOMContentLoaded', async () => {
-    await loadDatabase();
     const urlParams = new URLSearchParams(window.location.search);
     const id = urlParams.get('id');
 
-    if (id) {
-        const movie = allMovies.find(m => m.id == id);
-        if (movie) {
-            renderMovieDetails(movie);
-            renderSimilarMovies(movie);
-        } else {
-            document.getElementById('movie-content').innerHTML = `
-                <div class="error-container" style="text-align: center; padding: 100px;">
-                    <h2>Movie Not Found</h2>
-                    <p>Sorry, we couldn't find the movie you're looking for.</p>
-                    <a href="index.html" class="btn-play" style="display:inline-block; margin-top:20px;">Back to Home</a>
-                </div>
-            `;
-        }
-    } else {
+    if (!id) {
         window.location.href = 'index.html';
+        return;
     }
 
+    // Start fetching movie data and reviews in parallel for speed
+    const moviePromise = fetchMovieData(id);
+    const reviewsPromise = initReviewSystem(id);
+
+    const movie = await moviePromise;
+    if (movie) {
+        renderMovieDetails(movie);
+        renderSimilarMovies(movie);
+    } else {
+        showErrorPage();
+    }
+
+    // Initialize UI components after data starts loading
     initNavbarScroll();
     initGenreMenu();
     initWatchlistLogic();
     initModal();
-    initThemeToggle();
     initThemeToggle();
     updateWatchlistBadge();
 
@@ -58,20 +56,46 @@ document.addEventListener('DOMContentLoaded', async () => {
         currentUser = user;
         const authMessage = document.getElementById('auth-status-review');
         const reviewForm = document.getElementById('review-form');
-        
         if (user) {
-            authMessage.style.display = 'none';
-            reviewForm.style.display = 'block';
+            if (authMessage) authMessage.style.display = 'none';
+            if (reviewForm) reviewForm.style.display = 'block';
         } else {
-            authMessage.style.display = 'block';
-            reviewForm.style.display = 'none';
+            if (authMessage) authMessage.style.display = 'block';
+            if (reviewForm) reviewForm.style.display = 'none';
         }
     });
-
-    if (id) {
-        initReviewSystem(id);
-    }
 });
+
+async function fetchMovieData(id) {
+    try {
+        // 1. Try Firestore direct fetch (FASTEST)
+        const { getDoc, doc } = await import('firebase/firestore');
+        const movieRef = doc(db, "movies", id);
+        const movieSnap = await getDoc(movieRef);
+        
+        if (movieSnap.exists()) {
+            return { id: movieSnap.id, ...movieSnap.data() };
+        }
+
+        // 2. Fallback to local JSON search if not in Firestore (Migration phase)
+        const response = await fetch('./movies.json');
+        const movies = await response.json();
+        return movies.find(m => m.id == id);
+    } catch (e) {
+        console.error("Fetch error:", e);
+        return null;
+    }
+}
+
+function showErrorPage() {
+    document.getElementById('movie-content').innerHTML = `
+        <div class="error-container" style="text-align: center; padding: 100px;">
+            <h2>Movie Not Found</h2>
+            <p>Sorry, we couldn't find the movie you're looking for.</p>
+            <a href="index.html" class="btn-play" style="display:inline-block; margin-top:20px;">Back to Home</a>
+        </div>
+    `;
+}
 
 async function loadDatabase() {
     try {
