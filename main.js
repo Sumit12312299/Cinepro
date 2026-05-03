@@ -1,14 +1,11 @@
-import { createClient } from '@supabase/supabase-js';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-// --- Supabase Config ---
-// IMPORTANT: Please replace these with your actual Supabase project details
-const supabaseUrl = 'YOUR_SUPABASE_URL';
-const supabaseKey = 'YOUR_SUPABASE_ANON_KEY';
-const supabase = createClient(supabaseUrl, supabaseKey);
+// --- Auth Config (Supabase Disabled) ---
+// Note: Supabase is currently disabled. Provide valid credentials to enable cloud auth.
+const supabase = null;
 
 let allMovies = [];
 let user = null; // Store real user object
@@ -534,22 +531,30 @@ function initAuth() {
     });
 
     // --- State Listener ---
-    supabase.auth.onAuthStateChange((event, session) => {
-        user = session?.user || null;
-        isLoggedIn = !!user;
-        updateAuthUI();
-        updateWatchlistBadge();
-        
-        if (event === 'SIGNED_IN') {
-            loginModal.style.display = 'none';
-            showToast(`Welcome back, ${user.email.split('@')[0]}!`);
-        } else if (event === 'SIGNED_OUT') {
-            showToast("Signed out. See you soon!");
-        }
-    });
+    if (supabase) {
+        supabase.auth.onAuthStateChange((event, session) => {
+            user = session?.user || null;
+            isLoggedIn = !!user;
+            updateAuthUI();
+            updateWatchlistBadge();
+            
+            if (event === 'SIGNED_IN') {
+                loginModal.style.display = 'none';
+                showToast(`Welcome back, ${user.email.split('@')[0]}!`);
+            } else if (event === 'SIGNED_OUT') {
+                showToast("Signed out. See you soon!");
+            }
+        });
+    } else {
+        console.warn("Supabase not configured. Auth features are limited.");
+    }
 }
 
 async function handleSignUp(email, password) {
+    if (!supabase) {
+        showToast("Sign up is currently disabled (Supabase not configured)", "warning");
+        return;
+    }
     const { error } = await supabase.auth.signUp({ email, password });
     if (error) {
         showToast(error.message, "warning");
@@ -560,6 +565,10 @@ async function handleSignUp(email, password) {
 }
 
 async function handleLogin(email, password) {
+    if (!supabase) {
+        showToast("Sign in is currently disabled (Supabase not configured)", "warning");
+        return;
+    }
     const { error } = await supabase.auth.signInWithPassword({ email, password });
     if (error) {
         showToast(error.message, "warning");
@@ -567,6 +576,12 @@ async function handleLogin(email, password) {
 }
 
 async function handleLogout() {
+    if (!supabase) {
+        isLoggedIn = false;
+        updateAuthUI();
+        showToast("Signed out (local mode)");
+        return;
+    }
     if (confirm("Are you sure you want to sign out?")) {
         const { error } = await supabase.auth.signOut();
         if (error) showToast(error.message, "warning");
