@@ -37,8 +37,8 @@ async function loadDatabase() {
             console.log("Firestore empty, falling back to local JSON");
             const response = await fetch('./movies.json');
             allMovies = await response.json();
-            // Automatically trigger migration if user is admin or on first run
-            // await migrateToFirestore(allMovies); 
+            // Automatically trigger migration if Firestore is empty
+            await migrateToFirestore(allMovies); 
         }
     } catch (error) {
         console.error('Failed to load database:', error);
